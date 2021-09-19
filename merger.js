@@ -2,8 +2,6 @@ var http = require('http');
 const https = require("https");
 const axios = require("axios");
 
-//https://www.smithlakerentals.com/vrp/vrpical/prop1149.ics
-
 const calendars = [
     {
         url: "https://www.smithlakerentals.com/vrp/vrpical/prop1149.ics",
