@@ -54,26 +54,21 @@ async function getData() {
     try {
         for ( const calendar of calendars ) {
 
-            console.log("....");
             const response = await axios.get(calendar.url);
-            console.log("response"+calendar.url);
             const splitLines = response.data.split(/\r?\n/);
             let currentEvent = [];
             let isEvent = false;
             splitLines.forEach(line => {
                 if (/^BEGIN:VEVENT/.test(line)){
-                    //console.log(output.length+":"+currentEvent)
                     if (currentEvent.length>0) output.push(currentEvent);
                     currentEvent = [];
                     isEvent = true;
                 }
                 if (isEvent) {
                     if (/^SUMMARY/.test(line)){
-                        //console.log(calendar.prepend);
                         currentEvent.push("SUMMARY:"+calendar.prepend+"BOOKED");
                     }
                     else {
-                        //console.log(line);
                         currentEvent.push(line);
                     }
                 }
@@ -85,7 +80,6 @@ async function getData() {
         console.error(error);
     }
 
-    console.log("OUTPUT:"+output.length)
     return output;
   }
 
