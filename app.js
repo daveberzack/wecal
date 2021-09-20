@@ -1,6 +1,7 @@
 var http = require('http');
 const https = require("https");
 const axios = require("axios");
+const url = require('url');
 
 const calendars = [
     {
@@ -32,8 +33,26 @@ const calendars = [
         prepend: "Zen Red: ",
     },
 ]
-const onRequest = async (request, response) => {
-    console.log("request");
+const onRequest = (request, response) => {
+    
+    const calendarName = url.parse(request.url,true).query.c;
+    console.log("request:"+calendarName);
+
+    if (calendarName){
+        showCalendar(response, calendarName);
+    }
+    else {
+        showForm(response);
+    }
+}
+
+function showForm(response){
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.write("<h1>FORM</h1>");
+    response.end();
+}
+
+async function showCalendar(response, calendarName){
     response.writeHead(200, { 'Content-Type': 'text/plain' });
     let content = 'BEGIN:VCALENDAR\n';
     
