@@ -33,6 +33,7 @@ const calendars = [
     },
 ]
 const onRequest = async (request, response) => {
+    console.log("request");
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     let content = 'BEGIN:VCALENDAR\n';
     
@@ -44,6 +45,7 @@ const onRequest = async (request, response) => {
     });
 
     content += 'END:VCALENDAR';
+    console.log("write");
     response.write(content);
     response.end();
 }
