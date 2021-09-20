@@ -33,7 +33,7 @@ const calendars = [
     },
 ]
 const onRequest = async (request, response) => {
-    response.writeHead(200);
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
     let content = 'BEGIN:VCALENDAR\n';
     
     let events = await getData();
@@ -84,5 +84,5 @@ async function getData() {
   }
 
 
-http.createServer(onRequest).listen(8888, "0.0.0.0");
+http.createServer(onRequest).listen(process.env.PORT, "0.0.0.0");
 console.log('Server has started');
