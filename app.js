@@ -34,7 +34,7 @@ const calendars = [
 ]
 const onRequest = async (request, response) => {
     console.log("request");
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
     let content = 'BEGIN:VCALENDAR\n';
     
     let events = await getData();
